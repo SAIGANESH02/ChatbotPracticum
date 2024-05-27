@@ -1,16 +1,16 @@
 import torch
 from transformers import BertTokenizer, BertModel
 
-def load_model(model_path):
+def load_model():
     # Load the tokenizer and model
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertModel.from_pretrained('bert-base-uncased')
 
     # Path to your saved model weights
-    model_path_ = model_path
+    # model_path_ = model_path
 
-    # Load the model weights
-    model.load_state_dict(torch.load(model_path))
+    # # Load the model weights
+    # model.load_state_dict(torch.load(model_path))
     return tokenizer, model
 
 def predict(text, tokenizer, model):
@@ -22,7 +22,7 @@ def predict(text, tokenizer, model):
     return features
 
 # example usage
-tokenizer, model = load_model('model_directory_path', 'tokenizer_directory_path')
-text = "Example text for prediction."
-prediction = predict(text, tokenizer, model)
-print(prediction)
+# tokenizer, model = load_model()
+# text = "Example text for prediction."
+# prediction = predict(text, tokenizer, model)
+# print(prediction)
