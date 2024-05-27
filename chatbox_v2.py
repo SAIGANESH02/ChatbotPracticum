@@ -4,6 +4,15 @@ from transformers import pipeline, GPTJForCausalLM
 import torch
 from concurrent.futures import ThreadPoolExecutor
 from model_loader import load_model, predict
+from sklearn.linear_model import LogisticRegression
+import joblib
+
+# Load the model from the file
+joblin_file = "logistic_regression_model.pkl"
+model = joblib.load(joblin_file)
+
+# Now the model is ready to be used for prediction
+
 
 # example usage
 sentiment_pipeline = pipeline('sentiment-analysis')
@@ -31,9 +40,10 @@ def get_contextual_response(classification, sentiment):
         return "Thank you for sharing. Is there anything specific you'd like to talk more?"
 
 def main():
-    tokenizer, model = load_model('model_directory_path', 'tokenizer_directory_path')
+    joblin_file = "logistic_regression_model.pkl"
+    model = joblib.load(joblin_file)
     text = "Your text here for prediction."
-    prediction = predict(text, tokenizer, model)
+    prediction = model.predict(X_new)
     create_classification_prompt(text)
     label = analyze_sentiment(text)
     get_contextual_response(prediction, label)
