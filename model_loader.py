@@ -1,17 +1,23 @@
 import torch
 from transformers import BertTokenizer, BertModel
 
-def load_model(model_path, tokenizer_path):
-    tokenizer = BertTokenizer.from_pretrained(tokenizer_path)
-    model = BertModel.from_pretrained(model_path)
-    model.eval()
+def load_model(model_path):
+    # Load the tokenizer and model
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    model = BertModel.from_pretrained('bert-base-uncased')
+
+    # Path to your saved model weights
+    model_path_ = model_path
+
+    # Load the model weights
+    model.load_state_dict(torch.load(model_path))
     return tokenizer, model
 
 def predict(text, tokenizer, model):
+    model.eval()
     tokens = tokenizer(text, return_tensors='pt', padding=True, truncation=True)
     with torch.no_grad():
         outputs = model(**tokens)
-        # assuming want the mean of the last hidden states
         features = outputs.last_hidden_state.mean(dim=1)
     return features
 
