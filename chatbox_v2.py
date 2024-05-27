@@ -7,12 +7,6 @@ from model_loader import load_model, predict
 from sklearn.linear_model import LogisticRegression
 import joblib
 
-# Load the model from the file
-joblin_file = "logistic_regression_model.pkl"
-model = joblib.load(joblin_file)
-
-# Now the model is ready to be used for prediction
-
 
 # example usage
 sentiment_pipeline = pipeline('sentiment-analysis')
@@ -40,10 +34,12 @@ def get_contextual_response(classification, sentiment):
         return "Thank you for sharing. Is there anything specific you'd like to talk more?"
 
 def main():
+    tokenizer, model = load_model(model_path)
     joblin_file = "logistic_regression_model.pkl"
     model = joblib.load(joblin_file)
     text = "Your text here for prediction."
-    prediction = model.predict(X_new)
+    tokens = tokenizer(text)
+    prediction = model.predict(tokens)
     create_classification_prompt(text)
     label = analyze_sentiment(text)
     get_contextual_response(prediction, label)
