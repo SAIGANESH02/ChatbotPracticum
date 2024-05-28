@@ -22,7 +22,7 @@ To set up the project environment:
 
 1. Clone the repository:
    ```bash
-   git clone https://your-repository-link.git
+   git clone [https://your-repository-link.git](https://github.com/SAIGANESH02/ChatbotPracticum.git)
    cd your-repository-directory
    ```
 
