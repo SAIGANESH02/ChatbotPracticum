@@ -39,7 +39,7 @@ To run the chatbot with emotion classification:
 python app.py
 ```
 
-For training the model with new data or re-training:
+For training the Logistic Regression model with new data or re-training:
 
 ```bash
 jupyter notebook SameSameClassification.ipynb
